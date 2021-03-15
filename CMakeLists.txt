@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.16.0)
+
+project(ExpressionParser)
+
+add_subdirectory(Token)
+add_subdirectory(Node)
+add_subdirectory(ExpressionParser)
+
+add_library(ExpressionParser STATIC "")
+target_link_libraries(ExpressionParser expression_parser token node)
+
+add_subdirectory(Tests)
