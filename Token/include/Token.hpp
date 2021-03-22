@@ -48,6 +48,6 @@ TokenQueue ShuntingYard(TokenQueue& tokens_in);
 
 NodeStack TokensToNodes(TokenQueue& tokens_in);
 
-std::vector<std::string> STokens(const char* str);
+
 
 #endif // TOKEN_HPP

@@ -150,27 +150,3 @@ std::unique_ptr<Node> TokenToNode(std::unique_ptr<IToken>& token)
     return node;
 }
 
-std::vector<std::string> STokens(const char* str)
-{
-    std::vector<std::string> stokens;
-    std::string expr(str);
-    size_t index = 0;
-
-    while (index < expr.length())
-    {
-        auto pos = expr.find('+', index);
-        if(pos == std::string::npos) // no more operators
-        {
-            stokens.push_back(expr.substr(index));
-            break;    
-        }
-        auto length = pos-index;
-
-        stokens.push_back(expr.substr(index, length));
-        stokens.push_back(expr.substr(pos, 1));
-        
-        index = pos+1;
-    }
-
-    return stokens;
-}

@@ -47,6 +47,7 @@ TEST(StringTokens, FindPositions)
     EXPECT_EQ(expected, x);
 }
 
+
 TEST(StringTokens, SimplePlus)
 {
     std::vector<std::string> expected;
