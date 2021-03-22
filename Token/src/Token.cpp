@@ -82,11 +82,34 @@ TokenQueue StringToTokenQueue(const char * str)
 
 TokenQueue ShuntingYard(TokenQueue& tokens_in)
 {
-    TokenQueue tokens_out;
     // TODO: implement Shunting Yard 
-    tokens_out.push(std::unique_ptr<IToken>(new NumberToken(4)));
-    tokens_out.push(std::unique_ptr<IToken>(new NumberToken(3)));
-    tokens_out.push(std::unique_ptr<IToken>(new OperatorToken(OperatorType::Add)));
+    TokenQueue tokens_out;
+    TokenStack operator_stack;
+    while (!tokens_in.empty())
+    {
+        auto token = std::move(tokens_in.front());
+        tokens_in.pop();
+        if(token->IsNumber())
+        {
+            tokens_out.push(std::move(token));
+        }
+        else
+        {
+            operator_stack.push(std::move(token));
+        }
+    }
+
+    while (!operator_stack.empty())
+    {
+        tokens_out.push(std::move(operator_stack.top()));
+        operator_stack.pop();
+    }
+    
+    
+    
+    // tokens_out.push(std::unique_ptr<IToken>(new NumberToken(4)));
+    // tokens_out.push(std::unique_ptr<IToken>(new NumberToken(3)));
+    // tokens_out.push(std::unique_ptr<IToken>(new OperatorToken(OperatorType::Add)));
     return tokens_out;
 }
 
@@ -125,4 +148,29 @@ std::unique_ptr<Node> TokenToNode(std::unique_ptr<IToken>& token)
         break;
     }
     return node;
+}
+
+std::vector<std::string> STokens(const char* str)
+{
+    std::vector<std::string> stokens;
+    std::string expr(str);
+    size_t index = 0;
+
+    while (index < expr.length())
+    {
+        auto pos = expr.find('+', index);
+
+        if(pos == std::string::npos) // no more operators
+        {
+            stokens.push_back(expr.substr(index));
+            break;    
+        }
+
+        stokens.push_back(expr.substr(index, pos-index));
+        stokens.push_back(expr.substr(pos, 1));
+        
+        index = pos+1;
+    }
+
+    return stokens;
 }

@@ -37,3 +37,40 @@ TEST(TokenTest, Str2Tk)
     q.pop();
     EXPECT_EQ(2, dynamic_cast<NumberToken*>(z.get())->value );
 }
+
+TEST(StringTokens, SimplePlus)
+{
+    std::vector<std::string> expected;
+    expected.push_back("3");
+    expected.push_back("+");
+    expected.push_back("4");
+
+    auto x = STokens("3+4");
+    EXPECT_EQ(expected, x);
+}
+
+TEST(StringTokens, DecimalPlus)
+{
+    std::vector<std::string> expected;
+    expected.push_back("5.3");
+    expected.push_back("+");
+    expected.push_back("2.1");
+
+    auto x = STokens("5.3+2.1");
+    EXPECT_EQ(expected, x);
+}
+
+TEST(StringTokens, MultiplePluses)
+{
+    std::vector<std::string> expected;
+    expected.push_back("4");
+    expected.push_back("+");
+    expected.push_back("5");
+    expected.push_back("+");
+    expected.push_back("2");
+    expected.push_back("+");
+    expected.push_back("3");
+
+    auto x = STokens("4+5+2+3");
+    EXPECT_EQ(expected, x);
+}
