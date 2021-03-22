@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "Token.hpp"
 #include "OperatorToken.hpp"
+#include "SToken.hpp"
 
 TEST(TokenTest, Str2Tk1)
 {
@@ -36,6 +37,16 @@ TEST(TokenTest, Str2Tk)
     auto z = std::move(q.front());
     q.pop();
     EXPECT_EQ(2, dynamic_cast<NumberToken*>(z.get())->value );
+}
+
+TEST(StringTokens, FindPositions)
+{
+    std::vector<int> expected ={
+        1
+    };
+    auto x = GetOperatorMarkers("3+4");
+
+    EXPECT_EQ(expected, x);
 }
 
 TEST(StringTokens, SimplePlus)
