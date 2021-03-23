@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16.0)
 
 project(ExpressionParser)
 
+add_subdirectory(Operators)
 add_subdirectory(Token)
 add_subdirectory(Node)
 add_subdirectory(ExpressionParser)
