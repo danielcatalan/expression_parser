@@ -1,9 +1,12 @@
 #include "Token.hpp"
 #include "OperatorToken.hpp"
+#include "SToken.hpp"
 #include <cstdlib>
 #include <map>
 
 std::unique_ptr<Node> TokenToNode(std::unique_ptr<IToken>& token);
+
+std::unique_ptr<IToken> TokenFactory(const std::string& stoken);
 
 
 IToken::IToken(TokenType t) : type(t){}
@@ -64,20 +67,31 @@ TokenQueue StringToTokenQueue(const char * str)
     TokenQueue q;
     OperatorType op;
 
-    while(str[0] != '\0')
+    auto s_tokens = STokens(str); //vector of strings eg: ["3", "+", "4",...]
+
+    for (auto& s_token :s_tokens)
     {
-        if((op = OperatorLookUp(str[0])) != OperatorType::None)
-        {
-            str++;
-            q.push(std::unique_ptr<IToken>(new OperatorToken(op)));
-        }
-        else
-        {
-            auto num = std::strtod(str, (char**) &str);
-            q.push(std::unique_ptr<IToken>(new NumberToken(num)));
-        }
-    }
+        q.push(TokenFactory(s_token));
+    } 
+
     return q;
+}
+
+std::unique_ptr<IToken> TokenFactory(const std::string& stoken)
+{
+    if(stoken == "+")
+    {
+        return std::unique_ptr<IToken>(new OperatorToken(OperatorType::Add));
+    }
+    else if(stoken == "-")
+    {
+        return std::unique_ptr<IToken>(new OperatorToken(OperatorType::Subtract));
+    }
+    else
+    {
+        auto num = std::stod(stoken);
+        return std::unique_ptr<IToken>(new NumberToken(num));
+    }
 }
 
 TokenQueue ShuntingYard(TokenQueue& tokens_in)
