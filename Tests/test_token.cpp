@@ -84,3 +84,27 @@ TEST(StringTokens, MultiplePluses)
     auto x = STokens("4+5+2+3");
     EXPECT_EQ(expected, x);
 }
+
+TEST(StringTokens, SimpleMinus)
+{
+    std::vector<std::string> expected;
+    expected.push_back("3");
+    expected.push_back("-");
+    expected.push_back("4");
+
+    auto x = STokens("3-4");
+    EXPECT_EQ(expected, x);
+}
+
+TEST(StringTokens, SimplePlusMinus)
+{
+    std::vector<std::string> expected;
+    expected.push_back("3");
+    expected.push_back("+");
+    expected.push_back("4");
+    expected.push_back("-");
+    expected.push_back("5");
+
+    auto x = STokens("3+4-5");
+    EXPECT_EQ(expected, x);
+}
