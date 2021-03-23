@@ -8,6 +8,6 @@ add_subdirectory(Node)
 add_subdirectory(ExpressionParser)
 
 add_library(ExpressionParser STATIC "")
-target_link_libraries(ExpressionParser expression_parser token node)
+target_link_libraries(ExpressionParser expression_parser operators token node)
 
 add_subdirectory(Tests)

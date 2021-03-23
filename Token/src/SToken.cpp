@@ -1,4 +1,5 @@
 #include "SToken.hpp"
+#include "Operators.hpp"
 #include <array>
 
 std::vector<std::string> STokens(const char* cstr)
@@ -29,7 +30,7 @@ std::vector<std::string> STokens(const char* cstr)
 std::vector<int> GetOperatorMarkers(const char* cstr)
 {
     std::vector<int> positions;
-    std::array<std::string, 2> delims = {"+", "-"};
+    std::array<char const *,2> delims = GetSOperators();
     std::string str = cstr;
     
     auto start = 0;
