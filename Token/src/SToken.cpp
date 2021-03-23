@@ -25,6 +25,7 @@ std::vector<std::string> STokens(const char* cstr)
     return stokens;
 }
 
+
 std::vector<int> GetOperatorMarkers(const char* cstr)
 {
     std::vector<int> positions;
