@@ -24,7 +24,7 @@ double OperatorNode::Calculate()
 {
     auto lvalue = this->lnode->Calculate();
     auto rvalue = this->rnode->Calculate();
-    return this->func(rvalue, lvalue);
+    return this->func(lvalue, rvalue);
 }
 
 void OperatorNode::MapTree(NodeStack& stack)
