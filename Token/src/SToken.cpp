@@ -1,6 +1,7 @@
 #include "SToken.hpp"
 #include "Operators.hpp"
 #include <array>
+#include <algorithm>
 
 std::vector<std::string> STokens(const char* cstr)
 {
@@ -33,11 +34,12 @@ std::vector<int> GetOperatorMarkers(const char* cstr)
     std::array<char const *,2> delims = GetSOperators();
     std::string str = cstr;
     
-    auto start = 0;
-    auto pos = 0;
+
 
     for(auto& d : delims)
     {
+        auto start = 0;
+        auto pos = 0;
         while (true)
         {
             pos = str.find(d, start);
@@ -50,7 +52,7 @@ std::vector<int> GetOperatorMarkers(const char* cstr)
             start = pos+1;
         }
     }
-
+    std::sort(positions.begin(), positions.end());
 
     return positions;
 }
