@@ -12,6 +12,6 @@
  */
 std::vector<std::string> STokens(const char* str);
 
-std::vector<int> GetOperatorMarkers(const char* str);
+std::vector<int> FindOperatorMarkers(const char* str);
 
 #endif // STOKEN_HPP

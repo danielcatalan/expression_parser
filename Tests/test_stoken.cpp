@@ -4,7 +4,7 @@
 TEST(StringTokens, FindPositions)
 {
     std::vector<int> expected ={1,3};
-    auto x = GetOperatorMarkers("3+4+5");
+    auto x = FindOperatorMarkers("3+4+5");
 
     EXPECT_EQ(expected, x);
 }

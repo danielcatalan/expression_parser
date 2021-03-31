@@ -8,7 +8,7 @@ std::vector<std::string> STokens(const char* cstr)
     std::vector<std::string> stokens;
     std::string str = cstr;
 
-    auto positions = GetOperatorMarkers(cstr);
+    auto positions = FindOperatorMarkers(cstr);
     auto start = 0;
     
     for(auto& p : positions)
@@ -28,7 +28,7 @@ std::vector<std::string> STokens(const char* cstr)
 }
 
 
-std::vector<int> GetOperatorMarkers(const char* cstr)
+std::vector<int> FindOperatorMarkers(const char* cstr)
 {
     std::vector<int> positions;
     std::array<char const *,2> delims = GetSOperators();
