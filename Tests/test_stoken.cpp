@@ -70,3 +70,16 @@ TEST(StringTokens, SimplePlusMinus)
     auto x = STokens("3+4-5");
     EXPECT_EQ(expected, x);
 }
+
+TEST(StringTokens, MinusPlus)
+{
+    std::vector<std::string> expected;
+    expected.push_back("3");
+    expected.push_back("-");
+    expected.push_back("4");
+    expected.push_back("+");
+    expected.push_back("5");
+
+    auto x = STokens("3-4+5");
+    EXPECT_EQ(expected, x);
+}
