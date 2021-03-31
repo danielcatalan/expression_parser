@@ -99,10 +99,12 @@ TokenQueue ShuntingYard(TokenQueue& tokens_in)
     // TODO: implement Shunting Yard 
     TokenQueue tokens_out;
     TokenStack operator_stack;
+
     while (!tokens_in.empty())
     {
         auto token = std::move(tokens_in.front());
         tokens_in.pop();
+
         if(token->IsNumber())
         {
             tokens_out.push(std::move(token));
@@ -119,11 +121,6 @@ TokenQueue ShuntingYard(TokenQueue& tokens_in)
         operator_stack.pop();
     }
     
-    
-    
-    // tokens_out.push(std::unique_ptr<IToken>(new NumberToken(4)));
-    // tokens_out.push(std::unique_ptr<IToken>(new NumberToken(3)));
-    // tokens_out.push(std::unique_ptr<IToken>(new OperatorToken(OperatorType::Add)));
     return tokens_out;
 }
 
