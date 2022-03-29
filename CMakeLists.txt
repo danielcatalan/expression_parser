@@ -11,6 +11,6 @@ add_library(ExpressionParser STATIC
     src/ExpressionParser.cpp)
 target_include_directories(ExpressionParser PUBLIC include)
 
-target_link_libraries(ExpressionParser expression_parser operators token node)
+target_link_libraries(ExpressionParser operators token node)
 
 add_subdirectory(Tests)
