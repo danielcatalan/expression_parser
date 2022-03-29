@@ -2,7 +2,7 @@ name: CMake
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main development]
   pull_request:
     branches: [ main ]
 
@@ -20,8 +20,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: run-vcpkg
-      uses: lukka/run-vcpkg@v10.2
+    - name: Setup vcpkg
+      run: git clone https://github.com/microsoft/vcpkg.git
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
