@@ -5,12 +5,11 @@ project(ExpressionParser)
 # TODO: Simplify this. Use src/ and include/ only remove subdirectories
 add_subdirectory(Operators)
 add_subdirectory(Token)
-add_subdirectory(Node)
 
 add_library(ExpressionParser STATIC 
     src/ExpressionParser.cpp)
 target_include_directories(ExpressionParser PUBLIC include)
 
-target_link_libraries(ExpressionParser operators token node)
+target_link_libraries(ExpressionParser operators token)
 
 add_subdirectory(Tests)
