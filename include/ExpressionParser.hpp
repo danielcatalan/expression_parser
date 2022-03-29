@@ -12,7 +12,6 @@ private:
      NodePtr node = 0;
 public:
     ExpressionParser(const char* expression);
-    ~ExpressionParser();
 
     double Calculate();
 };
