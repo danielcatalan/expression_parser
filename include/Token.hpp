@@ -24,6 +24,7 @@ public:
     IToken(TokenType t);
     virtual ~IToken() = default;
     bool IsNumber();
+    bool IsOperator();
     TokenType getType();
 
 };

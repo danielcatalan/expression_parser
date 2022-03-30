@@ -21,6 +21,12 @@ bool IToken::IsNumber()
     return this->type == TokenType::Number;
 }
 
+bool IToken::IsOperator()
+{
+    return this->type == TokenType::Operator;
+}
+
+
 NumberToken::NumberToken(double number) : value(number), IToken(TokenType::Number)
 {
 
@@ -109,9 +115,23 @@ TokenQueue ShuntingYard(TokenQueue& tokens_in)
         {
             tokens_out.push(std::move(token));
         }
-        else
+        else if(token->IsOperator())
         {
-            operator_stack.push(std::move(token));
+            if((!operator_stack.empty()) && operator_stack.top()->IsOperator())
+            {
+                OperatorToken* ptoken = dynamic_cast<OperatorToken*>(token.get());
+                OperatorToken* ptoken_top = dynamic_cast<OperatorToken*>(operator_stack.top().get());
+                if(ptoken_top->Precedence() >= ptoken->Precedence())
+                {
+                    tokens_out.push(std::move(operator_stack.top()));
+                    operator_stack.pop();
+                    operator_stack.push(std::move(token));
+                }
+            }
+            else
+            {
+                operator_stack.push(std::move(token));
+            }
         }
     }
 
