@@ -4,7 +4,6 @@
 #include <memory>
 #include "Node.hpp"
 
-using NodePtr = std::unique_ptr<Node>;
 
 class ExpressionParser
 {

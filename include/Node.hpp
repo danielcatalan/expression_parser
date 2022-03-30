@@ -7,15 +7,17 @@
 
 class Node
 {
-private:
-    /* data */
 public:
-    virtual ~Node(){};
+
     virtual double Calculate() = 0;
     virtual void MapTree(std::stack<std::unique_ptr<Node>>& stack) = 0;
+    virtual ~Node() = default;
 };
 
-using NodeStack = std::stack<std::unique_ptr<Node>>;
+using NodePtr = std::unique_ptr<Node>;
+
+using NodeStack = std::stack<NodePtr>;
+
 
 class NumberNode : public Node
 {
@@ -31,8 +33,8 @@ public:
 class OperatorNode : public Node
 {
 private:
-    std::unique_ptr<Node> lnode;
-    std::unique_ptr<Node> rnode;
+    NodePtr lnode;
+    NodePtr rnode;
     double(*func)(double,double);
 
 public:
