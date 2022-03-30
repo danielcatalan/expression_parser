@@ -19,7 +19,7 @@ public:
     OperatorType op;
     double (*func)(double,double);
     OperatorToken(OperatorType type);
-    bool IsNumber() override;
+    int Precedence();
 };
 
 #endif // OPERATORTOKEN_HPP

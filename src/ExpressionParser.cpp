@@ -1,4 +1,4 @@
-#include <ExpressionParser.hpp>
+#include "ExpressionParser.hpp"
 #include "Token.hpp"
 #include <cmath>
 
@@ -18,9 +18,6 @@ ExpressionParser::ExpressionParser(const char* expression)
     this->node->MapTree(node_stack);
 }
 
-ExpressionParser::~ExpressionParser()
-{
-}
 
 double ExpressionParser::Calculate()
 {

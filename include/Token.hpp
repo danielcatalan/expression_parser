@@ -22,8 +22,9 @@ protected:
 
 public:
     IToken(TokenType t);
-    virtual ~IToken(){};
-    virtual bool IsNumber()=0;
+    virtual ~IToken() = default;
+    bool IsNumber();
+    bool IsOperator();
     TokenType getType();
 
 };
@@ -33,8 +34,6 @@ class NumberToken : public IToken
 public:
     NumberToken(double number);
     double value;
-    bool IsNumber() override;
-
 };
 
 

@@ -1,4 +1,0 @@
-
-add_library(expression_parser OBJECT src/ExpressionParser)
-target_include_directories(expression_parser PUBLIC include)
-target_link_libraries(expression_parser token node)

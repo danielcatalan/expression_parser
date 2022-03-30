@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <map>
 
-std::unique_ptr<Node> TokenToNode(std::unique_ptr<IToken>& token);
+std::unique_ptr<INode> TokenToNode(std::unique_ptr<IToken>& token);
 
 std::unique_ptr<IToken> TokenFactory(const std::string& stoken);
 
@@ -16,14 +16,20 @@ TokenType IToken::getType()
     return this->type;
 }
 
+bool IToken::IsNumber()
+{
+    return this->type == TokenType::Number;
+}
+
+bool IToken::IsOperator()
+{
+    return this->type == TokenType::Operator;
+}
+
+
 NumberToken::NumberToken(double number) : value(number), IToken(TokenType::Number)
 {
 
-}
-
-bool NumberToken::IsNumber()
-{
-    return true;
 }
 
 
@@ -89,7 +95,7 @@ std::unique_ptr<IToken> TokenFactory(const std::string& stoken)
     }
     else
     {
-        auto num = std::stod(stoken);
+        auto num = std::stod(stoken); // TODO: Maybe use strtod?
         return std::unique_ptr<IToken>(new NumberToken(num));
     }
 }
@@ -109,9 +115,23 @@ TokenQueue ShuntingYard(TokenQueue& tokens_in)
         {
             tokens_out.push(std::move(token));
         }
-        else
+        else if(token->IsOperator())
         {
-            operator_stack.push(std::move(token));
+            if((!operator_stack.empty()) && operator_stack.top()->IsOperator())
+            {
+                OperatorToken* ptoken = dynamic_cast<OperatorToken*>(token.get());
+                OperatorToken* ptoken_top = dynamic_cast<OperatorToken*>(operator_stack.top().get());
+                if(ptoken_top->Precedence() >= ptoken->Precedence())
+                {
+                    tokens_out.push(std::move(operator_stack.top()));
+                    operator_stack.pop();
+                    operator_stack.push(std::move(token));
+                }
+            }
+            else
+            {
+                operator_stack.push(std::move(token));
+            }
         }
     }
 
@@ -138,9 +158,9 @@ NodeStack TokensToNodes(TokenQueue& tokens_in)
     return node_stack;
 }
 
-std::unique_ptr<Node> TokenToNode(std::unique_ptr<IToken>& token)
+std::unique_ptr<INode> TokenToNode(std::unique_ptr<IToken>& token)
 {
-    std::unique_ptr<Node> node;
+    std::unique_ptr<INode> node;
 
     switch(token->getType())
     {
@@ -148,12 +168,12 @@ std::unique_ptr<Node> TokenToNode(std::unique_ptr<IToken>& token)
         double(*func)(double,double);
     case TokenType::Number:
         value = dynamic_cast<NumberToken*>(token.get())->value;
-        node = std::unique_ptr<Node>(new NumberNode(value));
+        node = NodePtr(new NumberNode(value));
         break;
 
     case TokenType::Operator:
         func = dynamic_cast<OperatorToken*>(token.get())->func;
-        node = std::unique_ptr<Node>(new OperatorNode(func));
+        node = NodePtr(new OperatorNode(func));
         break;
     default:
         break;
