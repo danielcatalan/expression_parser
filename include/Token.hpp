@@ -22,7 +22,7 @@ protected:
 
 public:
     IToken(TokenType t);
-    virtual ~IToken(){};
+    virtual ~IToken() = default;
     virtual bool IsNumber()=0;
     TokenType getType();
 
