@@ -1,20 +1,15 @@
 #include "OperatorToken.hpp"
 #include <cmath>
 
-double None(double l, double r)
-{
-    return NAN;
-}
+#define CREATE_BINARY_OPERATION(name, result) \
+    double name(double A, double B) {return result;}
 
-double Add(double l, double r)
-{
-    return l+r;
-}
+CREATE_BINARY_OPERATION(None, NAN)
+CREATE_BINARY_OPERATION(Add,  A + B)
+CREATE_BINARY_OPERATION(Sub,  A - B)
+CREATE_BINARY_OPERATION(Mult, A * B)
+CREATE_BINARY_OPERATION(Div,  A / B)
 
-double Sub(double l, double r)
-{
-    return l-r;
-}
 
 auto GetFunc(OperatorType type)
 {
