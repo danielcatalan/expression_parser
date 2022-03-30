@@ -19,6 +19,7 @@ public:
     OperatorType op;
     double (*func)(double,double);
     OperatorToken(OperatorType type);
+    int Precedence();
 };
 
 #endif // OPERATORTOKEN_HPP

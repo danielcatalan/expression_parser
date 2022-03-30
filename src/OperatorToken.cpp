@@ -31,3 +31,24 @@ OperatorToken::OperatorToken(OperatorType type) : op(type), IToken(TokenType::Op
 {
     this->func = GetFunc(type);
 }
+
+int OperatorToken::Precedence()
+{
+    switch (op)
+    {
+    case OperatorType::Add:
+    case OperatorType::Subtract:
+        return 2;
+        break;
+    case OperatorType::Multiply:
+    case OperatorType::Divide:
+        return 3;
+        break;
+    case OperatorType::Exponent:
+        return 4;
+    default:
+        return 0;
+        break;
+    }
+
+}
