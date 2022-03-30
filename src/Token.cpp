@@ -89,7 +89,7 @@ std::unique_ptr<IToken> TokenFactory(const std::string& stoken)
     }
     else
     {
-        auto num = std::stod(stoken);
+        auto num = std::stod(stoken); // TODO: Maybe use strtod?
         return std::unique_ptr<IToken>(new NumberToken(num));
     }
 }
