@@ -31,8 +31,3 @@ OperatorToken::OperatorToken(OperatorType type) : op(type), IToken(TokenType::Op
 {
     this->func = GetFunc(type);
 }
-
-bool OperatorToken::IsNumber()
-{
-    return false;
-}

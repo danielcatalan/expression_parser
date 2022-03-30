@@ -19,7 +19,6 @@ public:
     OperatorType op;
     double (*func)(double,double);
     OperatorToken(OperatorType type);
-    bool IsNumber() override;
 };
 
 #endif // OPERATORTOKEN_HPP

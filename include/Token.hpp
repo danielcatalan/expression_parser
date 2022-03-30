@@ -23,7 +23,7 @@ protected:
 public:
     IToken(TokenType t);
     virtual ~IToken() = default;
-    virtual bool IsNumber()=0;
+    bool IsNumber();
     TokenType getType();
 
 };
@@ -33,8 +33,6 @@ class NumberToken : public IToken
 public:
     NumberToken(double number);
     double value;
-    bool IsNumber() override;
-
 };
 
 

@@ -16,14 +16,14 @@ TokenType IToken::getType()
     return this->type;
 }
 
+bool IToken::IsNumber()
+{
+    return this->type == TokenType::Number;
+}
+
 NumberToken::NumberToken(double number) : value(number), IToken(TokenType::Number)
 {
 
-}
-
-bool NumberToken::IsNumber()
-{
-    return true;
 }
 
 
