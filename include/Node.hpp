@@ -5,21 +5,21 @@
 #include <stack>
 
 
-class Node
+class INode
 {
 public:
 
     virtual double Calculate() = 0;
-    virtual void MapTree(std::stack<std::unique_ptr<Node>>& stack) = 0;
-    virtual ~Node() = default;
+    virtual void MapTree(std::stack<std::unique_ptr<INode>>& stack) = 0;
+    virtual ~INode() = default;
 };
 
-using NodePtr = std::unique_ptr<Node>;
+using NodePtr = std::unique_ptr<INode>;
 
 using NodeStack = std::stack<NodePtr>;
 
 
-class NumberNode : public Node
+class NumberNode : public INode
 {
 private:
     double value;
@@ -30,7 +30,7 @@ public:
     void MapTree(NodeStack& stack) override;
 };
 
-class OperatorNode : public Node
+class OperatorNode : public INode
 {
 private:
     NodePtr lnode;

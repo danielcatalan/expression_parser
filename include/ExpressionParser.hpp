@@ -8,7 +8,7 @@
 class ExpressionParser
 {
 private:
-     NodePtr node = 0;
+    NodePtr node = 0;
 public:
     ExpressionParser(const char* expression);
 

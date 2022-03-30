@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <map>
 
-std::unique_ptr<Node> TokenToNode(std::unique_ptr<IToken>& token);
+std::unique_ptr<INode> TokenToNode(std::unique_ptr<IToken>& token);
 
 std::unique_ptr<IToken> TokenFactory(const std::string& stoken);
 
@@ -138,9 +138,9 @@ NodeStack TokensToNodes(TokenQueue& tokens_in)
     return node_stack;
 }
 
-std::unique_ptr<Node> TokenToNode(std::unique_ptr<IToken>& token)
+std::unique_ptr<INode> TokenToNode(std::unique_ptr<IToken>& token)
 {
-    std::unique_ptr<Node> node;
+    std::unique_ptr<INode> node;
 
     switch(token->getType())
     {
@@ -148,12 +148,12 @@ std::unique_ptr<Node> TokenToNode(std::unique_ptr<IToken>& token)
         double(*func)(double,double);
     case TokenType::Number:
         value = dynamic_cast<NumberToken*>(token.get())->value;
-        node = std::unique_ptr<Node>(new NumberNode(value));
+        node = NodePtr(new NumberNode(value));
         break;
 
     case TokenType::Operator:
         func = dynamic_cast<OperatorToken*>(token.get())->func;
-        node = std::unique_ptr<Node>(new OperatorNode(func));
+        node = NodePtr(new OperatorNode(func));
         break;
     default:
         break;
