@@ -25,6 +25,11 @@ ExpressionParser::ExpressionParser(const char* expression)
 double ExpressionParser::Calculate()
 {
     if(node.get() != nullptr)
+    {
         return this->node->Calculate();
-    return NAN;
+    }
+    else
+    {
+        return NAN;
+    }
 }
