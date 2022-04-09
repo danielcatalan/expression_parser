@@ -1,6 +1,9 @@
 #include "ExpressionParser.hpp"
-#include "Token.hpp"
 #include <cmath>
+#include "Token.hpp"
+#include "OperatorToken.hpp"
+#include "ShuntingYard.hpp"
+
 
 ExpressionParser::ExpressionParser(const char* expression)
 {

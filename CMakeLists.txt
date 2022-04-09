@@ -9,7 +9,8 @@ add_library(ExpressionParser STATIC
     src/Operators.cpp
     src/OperatorToken.cpp
     src/SToken.cpp
-    src/Token.cpp)
+    src/Token.cpp
+    src/ShuntingYard.cpp)
 
 target_include_directories(ExpressionParser PUBLIC include)
 

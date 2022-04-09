@@ -43,8 +43,6 @@ using TokenStack = std::stack<std::unique_ptr<IToken>>;
 
 TokenQueue StringToTokenQueue(const char * str);
 
-TokenQueue ShuntingYard(TokenQueue& tokens_in);
-
 NodeStack TokensToNodes(TokenQueue& tokens_in);
 
 
