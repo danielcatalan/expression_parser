@@ -68,7 +68,7 @@ OperatorType OperatorLookUp(char c)
     }
 }
 
-TokenQueue StringToTokenQueue(const char * str)
+TokenQueue ExpressionToTokens(const char * str)
 {
     TokenQueue q;
     OperatorType op;

@@ -4,7 +4,7 @@
 
 TEST(TokenTest, Str2Tk1)
 {
-    auto q = StringToTokenQueue("4+3");
+    auto q = ExpressionToTokens("4+3");
     ASSERT_EQ(3, q.size());
 
     auto x = std::move(q.front());
@@ -22,7 +22,7 @@ TEST(TokenTest, Str2Tk1)
 
 TEST(TokenTest, Str2Tk)
 {
-    auto q = StringToTokenQueue("5-2");
+    auto q = ExpressionToTokens("5-2");
     ASSERT_EQ(3, q.size());
 
     auto x = std::move(q.front());

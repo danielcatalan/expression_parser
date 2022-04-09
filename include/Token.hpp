@@ -41,7 +41,7 @@ public:
 using TokenQueue = std::queue<std::unique_ptr<IToken>>;
 using TokenStack = std::stack<std::unique_ptr<IToken>>;
 
-TokenQueue StringToTokenQueue(const char * str);
+TokenQueue ExpressionToTokens(const char * str);
 
 NodeStack TokensToNodes(TokenQueue& tokens_in);
 

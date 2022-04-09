@@ -8,7 +8,7 @@
 ExpressionParser::ExpressionParser(const char* expression)
 {
     // convert string to queue of tokens
-    auto tokens_in = StringToTokenQueue(expression);
+    auto tokens_in = ExpressionToTokens(expression);
 
     // Use Shunting-Yard Algorithm
     auto tokens_out = ShuntingYard(tokens_in);
